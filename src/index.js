@@ -10,6 +10,7 @@ const Theme = {
 const refs = {
   output: document.querySelector('ul.js-menu'),
   checkbox: document.querySelector('input.js-switch-input'),
+  body: document.querySelector('body'),
 };
 
 const markup = menu.map(item => itemTemplate(item)).join('');
@@ -23,21 +24,21 @@ refs.checkbox.addEventListener('change', isChecked);
 
 function isChecked() {
   if (refs.checkbox.checked) {
-    document.body.classList.replace(Theme.LIGHT, Theme.DARK);
+    refs.body.classList.replace(Theme.LIGHT, Theme.DARK);
     saveTheme(Theme.DARK);
     return;
   }
-  document.body.classList.replace(Theme.DARK, Theme.LIGHT);
+  refs.body.classList.replace(Theme.DARK, Theme.LIGHT);
   saveTheme(Theme.LIGHT);
 }
 
 function AddSavedTheme(currentTheme) {
-  document.body.classList.add(Theme.LIGHT);
+  refs.body.classList.add(Theme.LIGHT);
   refs.checkbox.checked = false;
 
   if (currentTheme) {
     if (currentTheme === Theme.DARK) {
-      document.body.classList.add(currentTheme);
+      refs.body.classList.add(currentTheme);
       refs.checkbox.checked = currentTheme === Theme.DARK;
     }
   }
